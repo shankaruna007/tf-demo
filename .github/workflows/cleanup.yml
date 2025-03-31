@@ -13,6 +13,7 @@ jobs:
     env:
       AWS_REGION: 'us-east-1'
       TF_VERSION: '1.5.0'
+      TFSEC_VERSION: '1.29.0'
 
     steps:
     - name: 'Checkout GitHub repository'
@@ -29,6 +30,22 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: ${{ env.TF_VERSION }}
+
+    - name: 'Install tfsec'
+      run: |
+        # Download tfsec binary
+        curl -sLo tfsec https://github.com/aquasecurity/tfsec/releases/download/v${{ env.TFSEC_VERSION }}/tfsec-linux-amd64
+        # Verify that the downloaded file is not an HTML page (in case of failed download)
+        if file tfsec | grep -q 'HTML'; then
+          echo "Error: Downloaded file is not a binary. Please check the URL."
+          exit 1
+        fi
+        # Make tfsec executable
+        chmod +x tfsec
+        # Move tfsec to the system's PATH (e.g., /usr/local/bin)
+        mv tfsec /usr/local/bin/
+        # Verify the installation
+        tfsec --version
 
     - name: 'Terraform Init'
       run: terraform init
