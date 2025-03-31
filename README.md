@@ -1,2 +1,2 @@
-# tf-demo
-devops ci/cd popeline using terrafrom
+# github-actions-terraform
+github-actions-terraform
