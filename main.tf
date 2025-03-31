@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 #tfsec:ignore:aws-s3-enable-bucket-logging
