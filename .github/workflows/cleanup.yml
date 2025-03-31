@@ -34,7 +34,7 @@ jobs:
     - name: 'Install tfsec'
       run: |
         # Download tfsec binary
-        curl -sLo tfsec https://github.com/aquasecurity/tfsec/releases/download/v${{ env.TFSEC_VERSION }}/tfsec-linux-amd64
+        curl -sLo tfsec https://github.com/aquasecurity/tfsec/releases/download/v<version>/tfsec-linux-amd64
         # Verify that the downloaded file is not an HTML page (in case of failed download)
         if file tfsec | grep -q 'HTML'; then
           echo "Error: Downloaded file is not a binary. Please check the URL."
