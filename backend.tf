@@ -1,8 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "my-terraform-state-bobby"
-    region         = "us-east-1"
+    bucket         = "my-tf-us-east-2-state-file"
+    region         = "us-east-2"
     key            = "s3-github-actions/terraform.tfstate"
+    dynamodb_table = "my-table-us-east-2-dynamodb"
     encrypt = true
   }
   required_version = ">=0.13.0"
